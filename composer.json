@@ -19,7 +19,8 @@
         "phpstan/phpstan": "^0.12",
         "vimeo/psalm": "^4.1",
         "phpmetrics/phpmetrics": "^2.7",
-        "doctrine/coding-standard": "^8.1"
+        "doctrine/coding-standard": "^8.1",
+        "symfony/var-dumper": "^5.2"
     },
     "autoload": {
         "psr-4": {
