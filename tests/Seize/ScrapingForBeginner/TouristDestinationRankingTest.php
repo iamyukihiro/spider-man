@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Goreboothero\SpiderMan\Seize;
 
+use DOMWrap\Document;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 
@@ -14,7 +15,7 @@ class ScrapingForBeginnerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->scrapingForBeginner = new ScrapingForBeginner(new Client());
+        $this->scrapingForBeginner = new ScrapingForBeginner(new Client(), new Document());
     }
 
     public function testIsInstanceOfScrapingForBeginner(): void
