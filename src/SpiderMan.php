@@ -10,4 +10,5 @@ namespace Goreboothero\SpiderMan;
  */
 final class SpiderMan
 {
+
 }
