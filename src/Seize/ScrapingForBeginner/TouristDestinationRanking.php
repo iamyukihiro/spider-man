@@ -8,6 +8,8 @@ use DOMWrap\Document;
 use DOMWrap\Element;
 use Goreboothero\SpiderMan\DTO\TouristDestination;
 use GuzzleHttp\Client;
+use Psr\Http\Message\ResponseInterface;
+use Throwable;
 
 use function dd;
 use function mb_strlen;
@@ -34,13 +36,25 @@ class TouristDestinationRanking
 
     public function pull(): void
     {
-        $response = $this->client->get('https://scraping-for-beginner.herokuapp.com/ranking/');
+        $response = $this->requestScrapingPage();
         $html     = $response->getBody()->getContents();
-
         $rankingPageDocument = $this->document->html($html);
+
         $touristDestinations = $this->makeRankingPageDocumentToTouristDestinations($rankingPageDocument);
 
         dd($touristDestinations);
+    }
+
+    private function requestScrapingPage(): ResponseInterface
+    {
+        $response = '';
+
+        try {
+            $response = $this->client->get('https://scraping-for-beginner.herokuapp.com/ranking/');
+        } catch (Throwable $exception) {
+        }
+
+        return $response;
     }
 
     /**
