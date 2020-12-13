@@ -2,17 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Goreboothero\SpiderMan\Seize;
+namespace Goreboothero\SpiderMan\Seize\ScrapingForBeginner;
 
 use DOMWrap\Document;
 use DOMWrap\Element;
+use DOMWrap\NodeList;
+use Goreboothero\SpiderMan\DTO\TouristDestination;
 use GuzzleHttp\Client;
 
+
 /**
- * Class ScrapingForBeginner
+ * Class TouristDestinationRanking
  * @package Goreboothero\SpiderMan\Seize
  */
-class ScrapingForBeginner
+class TouristDestinationRanking
 {
     /**
      * @var Client
@@ -40,16 +43,35 @@ class ScrapingForBeginner
         $response = $this->client->get('https://scraping-for-beginner.herokuapp.com/ranking/');
         $html = $response->getBody()->getContents();
 
-        $documentNode = new Document();
-        $domNode = $documentNode->html($html);
+        $rankingPageDocument = $this->document->html($html);
+        $touristDestinations = $this->makeRankingPageDocumentToTouristDestinations($rankingPageDocument);
+
+        dd($touristDestinations);
+    }
+
+    /**
+     * @param Document $rankingPageDocument
+     * @return TouristDestination[]
+     */
+    private function makeRankingPageDocumentToTouristDestinations(Document $rankingPageDocument)
+    {
+        $touristDestinations = [];
 
         /**
          * @var Element[] $domElements
          */
-        $domElements = $domNode->find('div.u_areaListRankingBox > div > span.evaluateNumber')->toArray();
-
+        $domElements = $rankingPageDocument->find('div.u_areaListRankingBox.row')->toArray();
         foreach ($domElements as $domElement) {
-            dump($domElement->getText());
+            $headingNumberText = $domElement->find('div.u_title h2 span.badge')->text();
+            $headingNumberAndTitleText = $domElement->find('div.u_title h2')->text();
+
+            $touristDestinationName = mb_substr($headingNumberAndTitleText, mb_strlen($headingNumberText));
+            $totalStarRate = $domElement->find('div.u_rankBox span.evaluateNumber')->text();
+
+            // TODO:Factoryで生成するようにする
+            $touristDestinations[] = new TouristDestination($touristDestinationName, $totalStarRate);
         }
+
+        return $touristDestinations;
     }
 }

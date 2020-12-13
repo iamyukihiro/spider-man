@@ -2,54 +2,48 @@
 
 declare(strict_types=1);
 
-namespace Goreboothero\SpiderMan\Seize\ScrapingForBeginner;
-
-use DOMWrap\Document;
-use DOMWrap\Element;
-use GuzzleHttp\Client;
+namespace Goreboothero\SpiderMan\DTO;
 
 /**
- * Class TouristDestinationRanking
- * @package Goreboothero\SpiderMan\Seize
+ * Class TouristDestination
+ * @package Goreboothero\SpiderMan\DTO
  */
-class TouristDestinationRanking
+class TouristDestination
 {
     /**
-     * @var Client
+     * @var string
      */
-    private $client;
+    private $name;
 
     /**
-     * @var Document
+     * @var string
      */
-    private $document;
+    private $totalStarRate;
 
     /**
      * ScrapingForBeginner constructor.
-     * @param Client $client
-     * @param Document $document
+     * @param string $name
+     * @param string $totalStarRate
      */
-    public function __construct(Client $client, Document $document)
+    public function __construct(string $name, string $totalStarRate)
     {
-        $this->client = $client;
-        $this->document = $document;
+        $this->name = $name;
+        $this->totalStarRate = $totalStarRate;
     }
 
-    public function pull()
+    /**
+     * @return string
+     */
+    public function getName(): string
     {
-        $response = $this->client->get('https://scraping-for-beginner.herokuapp.com/ranking/');
-        $html = $response->getBody()->getContents();
+        return $this->name;
+    }
 
-        $documentNode = new Document();
-        $domNode = $documentNode->html($html);
-
-        /**
-         * @var Element[] $domElements
-         */
-        $domElements = $domNode->find('div.u_areaListRankingBox > div > span.evaluateNumber')->toArray();
-
-        foreach ($domElements as $domElement) {
-            dump($domElement->getText());
-        }
+    /**
+     * @return string
+     */
+    public function getTotalStarRate(): string
+    {
+        return $this->totalStarRate;
     }
 }
