@@ -9,18 +9,23 @@ use DOMWrap\Element;
 use Goreboothero\SpiderMan\DTO\TouristDestination;
 use GuzzleHttp\Client;
 
+use function dd;
+use function mb_strlen;
+use function mb_substr;
+
 class TouristDestinationRanking
 {
-    /**
-     * @var Client
-     */
+    /** @var Client */
     private $client;
 
-    /**
-     * @var Document
-     */
+    /** @var Document */
     private $document;
 
+    /**
+     * TouristDestinationRanking constructor.
+     * @param Client $client
+     * @param Document $document
+     */
     public function __construct(Client $client, Document $document)
     {
         $this->client   = $client;
@@ -30,7 +35,7 @@ class TouristDestinationRanking
     public function pull(): void
     {
         $response = $this->client->get('https://scraping-for-beginner.herokuapp.com/ranking/');
-        $html = $response->getBody()->getContents();
+        $html     = $response->getBody()->getContents();
 
         $rankingPageDocument = $this->document->html($html);
         $touristDestinations = $this->makeRankingPageDocumentToTouristDestinations($rankingPageDocument);
@@ -51,11 +56,11 @@ class TouristDestinationRanking
          */
         $domElements = $rankingPageDocument->find('div.u_areaListRankingBox.row')->toArray();
         foreach ($domElements as $domElement) {
-            $headingNumberText = $domElement->find('div.u_title h2 span.badge')->text();
+            $headingNumberText         = $domElement->find('div.u_title h2 span.badge')->text();
             $headingNumberAndTitleText = $domElement->find('div.u_title h2')->text();
 
             $touristDestinationName = mb_substr($headingNumberAndTitleText, mb_strlen($headingNumberText));
-            $totalStarRate = $domElement->find('div.u_rankBox span.evaluateNumber')->text();
+            $totalStarRate          = $domElement->find('div.u_rankBox span.evaluateNumber')->text();
 
             // TODO:Factoryで生成するようにする
             $touristDestinations[] = new TouristDestination($touristDestinationName, $totalStarRate);
