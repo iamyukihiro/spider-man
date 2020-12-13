@@ -9,16 +9,16 @@ use DOMWrap\Element;
 use Goreboothero\SpiderMan\DTO\TouristDestination;
 use GuzzleHttp\Client;
 
-/**
- * Class TouristDestinationRanking
- * @package Goreboothero\SpiderMan\Seize\ScrapingForBeginner
- */
 class TouristDestinationRanking
 {
-    /** @var Client */
+    /**
+     * @var Client
+     */
     private $client;
 
-    /** @var Document */
+    /**
+     * @var Document
+     */
     private $document;
 
     public function __construct(Client $client, Document $document)

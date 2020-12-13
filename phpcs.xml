@@ -22,14 +22,29 @@
     <exclude-pattern>*/Fake/*</exclude-pattern>
 
     <!-- PSR12 Coding Standard -->
-    <rule ref="PSR2"/>
+    <rule ref="PSR2">
+        <exclude name="Generic.Files.LineLength"/>
+        <exclude name="Generic.NamingConventions.UpperCaseConstantName"/>
+        <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+        <exclude name="Generic.Strings.UnnecessaryStringConcat"/>
+    </rule>
 
+    <!-- PEAR Coding Standard -->
     <rule ref="PEAR.Commenting.FunctionComment">
-        <exclude name="PEAR.Commenting.FunctionComment.MissingReturn"/>
-        <exclude name="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-        <exclude name="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-        <exclude name="PEAR.Commenting.FunctionComment.MissingParamTag"/>
         <exclude name="PEAR.Commenting.FunctionComment.Missing"/>
+        <exclude name="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+        <exclude name="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+        <exclude name="PEAR.Commenting.FunctionComment.MissingReturn"/>
         <exclude name="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+        <exclude name="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+    </rule>
+
+    <!-- Additional Rules -->
+    <rule ref="SlevomatCodingStandard.Classes.PropertySpacing">
+        <properties>
+            <property name="minLinesCountBeforeWithComment" value="1"/>
+            <property name="maxLinesCountBeforeWithComment" value="1"/>
+            <property name="maxLinesCountBeforeWithoutComment" value="0"/>
+        </properties>
     </rule>
 </ruleset>

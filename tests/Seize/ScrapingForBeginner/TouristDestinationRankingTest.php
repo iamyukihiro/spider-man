@@ -8,9 +8,15 @@ use DOMWrap\Document;
 use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class TouristDestinationRankingTest
+ * @package Goreboothero\SpiderMan\Seize\ScrapingForBeginner
+ */
 class TouristDestinationRankingTest extends TestCase
 {
-    /** @var TouristDestinationRanking */
+    /**
+     * @var TouristDestinationRanking
+     */
     protected $scrapingForBeginner;
 
     protected function setUp(): void
