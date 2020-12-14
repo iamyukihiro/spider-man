@@ -8,10 +8,11 @@ use DOMWrap\Document;
 use DOMWrap\Element;
 use Goreboothero\SpiderMan\DTO\TouristDestination;
 use GuzzleHttp\Client;
+use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-use function dd;
+use function collect;
 use function mb_strlen;
 use function mb_substr;
 
@@ -34,15 +35,13 @@ class TouristDestinationRanking
         $this->document = $document;
     }
 
-    public function pull(): void
+    public function pull(): Collection
     {
         $response = $this->requestScrapingPage();
         $html     = $response->getBody()->getContents();
         $rankingPageDocument = $this->document->html($html);
 
-        $touristDestinations = $this->makeRankingPageDocumentToTouristDestinations($rankingPageDocument);
-
-        dd($touristDestinations);
+        return $this->makeRankingPageDocumentToTouristDestinations($rankingPageDocument);
     }
 
     private function requestScrapingPage(): ResponseInterface
@@ -59,9 +58,9 @@ class TouristDestinationRanking
 
     /**
      * @param Document $rankingPageDocument
-     * @return TouristDestination[]
+     * @return Collection|TouristDestination[]
      */
-    private function makeRankingPageDocumentToTouristDestinations(Document $rankingPageDocument): array
+    private function makeRankingPageDocumentToTouristDestinations(Document $rankingPageDocument): Collection
     {
         $touristDestinations = [];
 
@@ -80,6 +79,6 @@ class TouristDestinationRanking
             $touristDestinations[] = new TouristDestination($touristDestinationName, $totalStarRate);
         }
 
-        return $touristDestinations;
+        return collect($touristDestinations);
     }
 }
