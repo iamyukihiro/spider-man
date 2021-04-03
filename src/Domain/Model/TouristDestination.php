@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Goreboothero\SpiderMan\DTO;
+namespace Goreboothero\SpiderMan\Domain\Model;
 
 class TouristDestination
 {

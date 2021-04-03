@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Goreboothero\SpiderMan\Seize\ScrapingForBeginner;
+namespace Goreboothero\SpiderMan\Service\Fetcher\ScrapingForBeginner;
 
 use DOMWrap\Document;
 use DOMWrap\Element;
-use Goreboothero\SpiderMan\DTO\TouristDestination;
+use Goreboothero\SpiderMan\Domain\Model\TouristDestination;
 use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;

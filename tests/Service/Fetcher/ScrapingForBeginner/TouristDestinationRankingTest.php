@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Goreboothero\SpiderMan\Seize\ScrapingForBeginner;
+namespace Goreboothero\SpiderMan\Service\Fetcher\ScrapingForBeginner;
 
 use DOMWrap\Document;
-use Goreboothero\SpiderMan\DTO\TouristDestination;
+use Goreboothero\SpiderMan\Domain\Model\TouristDestination;
 use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\TestCase;
@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class TouristDestinationRankingTest extends TestCase
 {
     /** @var TouristDestinationRanking */
-    protected $scrapingForBeginner;
+    private $scrapingForBeginner;
 
     protected function setUp(): void
     {
