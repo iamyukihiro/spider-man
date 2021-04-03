@@ -10,6 +10,8 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Collection;
 use PHPUnit\Framework\TestCase;
 
+use function assert;
+
 class TouristDestinationRankingTest extends TestCase
 {
     /** @var TouristDestinationRanking */
@@ -29,8 +31,8 @@ class TouristDestinationRankingTest extends TestCase
         $this->assertInstanceOf(Collection::class, $actual);
         $this->assertInstanceOf(TouristDestination::class, $actual->first());
 
-        /** @var TouristDestination $touristDestination */
         $touristDestination = $actual->first();
+        assert($touristDestination instanceof TouristDestination);
         $this->assertInstanceOf(TouristDestination::class, $touristDestination);
         $this->assertIsString($touristDestination->getName());
         $this->assertIsString($touristDestination->getTotalStarRate());

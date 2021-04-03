@@ -7,9 +7,9 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-<!--    <php>-->
-<!--        <ini name="error_reporting" value="-1" />-->
-<!--    </php>-->
+    <php>
+        <ini name="error_reporting" value="0" />
+    </php>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
