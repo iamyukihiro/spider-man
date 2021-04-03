@@ -26,5 +26,10 @@ jobs:
           paths:
             - ./vendor
 
-      - run: composer test
-      - run: composer cs-fix
+      - run:
+          name: "run test"
+          command: composer test
+      - run:
+          name: "run lint"
+          command: composer cs-fix
+
