@@ -12,10 +12,6 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-use function collect;
-use function mb_strlen;
-use function mb_substr;
-
 class TouristDestinationRankingFetcher
 {
     public function __construct(
@@ -27,7 +23,7 @@ class TouristDestinationRankingFetcher
     public function fetch(): Collection
     {
         $response = $this->requestScrapingPage();
-        $html     = $response->getBody()->getContents();
+        $html = $response->getBody()->getContents();
         $rankingPageDocument = $this->document->html($html);
 
         return $this->makeRankingPageDocumentToTouristDestinations($rankingPageDocument);
