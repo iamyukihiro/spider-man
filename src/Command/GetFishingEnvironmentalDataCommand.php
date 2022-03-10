@@ -15,11 +15,11 @@ class GetFishingEnvironmentalDataCommand extends Command
 
     protected function configure(): void
     {
-        $this->setHelp('指定された釣行日時と場所の、当日の環境情報を取得');
+        $this->setHelp('釣行日時と場所を指定して、当日の環境情報を取得します。');
 
         $this->addArgument('date', InputArgument::REQUIRED, '釣行日時 ／ (例)：2022-01-01');
         $this->addArgument('prefecture', InputArgument::REQUIRED, '県名 (県、府は含めない) ／ (例)：大阪');
-        $this->addArgument('fishing-place', InputArgument::REQUIRED, '釣行場所 ／ (例)：淀川、鳥取港');
+        $this->addArgument('fishing-place', InputArgument::REQUIRED, '釣行場所 ／ (例)：鳥取港');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
