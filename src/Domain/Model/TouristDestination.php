@@ -6,16 +6,10 @@ namespace Goreboothero\SpiderMan\Domain\Model;
 
 class TouristDestination
 {
-    /** @var string */
-    private $name;
-
-    /** @var string */
-    private $totalStarRate;
-
-    public function __construct(string $name, string $totalStarRate)
-    {
-        $this->name          = $name;
-        $this->totalStarRate = $totalStarRate;
+    public function __construct(
+        private string $name,
+        private string $totalStarRate
+    ) {
     }
 
     public function getName(): string

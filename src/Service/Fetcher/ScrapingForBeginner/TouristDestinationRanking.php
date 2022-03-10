@@ -12,27 +12,12 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-use function collect;
-use function mb_strlen;
-use function mb_substr;
-
 class TouristDestinationRanking
 {
-    /** @var Client */
-    private $client;
-
-    /** @var Document */
-    private $document;
-
-    /**
-     * TouristDestinationRanking constructor.
-     * @param Client $client
-     * @param Document $document
-     */
-    public function __construct(Client $client, Document $document)
-    {
-        $this->client   = $client;
-        $this->document = $document;
+    public function __construct(
+        private Client $client,
+        private Document $document
+    ) {
     }
 
     public function pull(): Collection
