@@ -12,33 +12,18 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-use function collect;
-use function mb_strlen;
-use function mb_substr;
-
-class TouristDestinationRanking
+class TouristDestinationRankingFetcher
 {
-    /** @var Client */
-    private $client;
-
-    /** @var Document */
-    private $document;
-
-    /**
-     * TouristDestinationRanking constructor.
-     * @param Client $client
-     * @param Document $document
-     */
-    public function __construct(Client $client, Document $document)
-    {
-        $this->client   = $client;
-        $this->document = $document;
+    public function __construct(
+        private Client $client,
+        private Document $document
+    ) {
     }
 
-    public function pull(): Collection
+    public function fetch(): Collection
     {
         $response = $this->requestScrapingPage();
-        $html     = $response->getBody()->getContents();
+        $html = $response->getBody()->getContents();
         $rankingPageDocument = $this->document->html($html);
 
         return $this->makeRankingPageDocumentToTouristDestinations($rankingPageDocument);
@@ -58,7 +43,7 @@ class TouristDestinationRanking
 
     /**
      * @param Document $rankingPageDocument
-     * @return Collection|TouristDestination[]
+     * @return Collection<TouristDestination>
      */
     private function makeRankingPageDocumentToTouristDestinations(Document $rankingPageDocument): Collection
     {
@@ -75,7 +60,6 @@ class TouristDestinationRanking
             $touristDestinationName = mb_substr($headingNumberAndTitleText, mb_strlen($headingNumberText));
             $totalStarRate          = $domElement->find('div.u_rankBox span.evaluateNumber')->text();
 
-            // TODO:Factoryで生成するようにする
             $touristDestinations[] = new TouristDestination($touristDestinationName, $totalStarRate);
         }
 
