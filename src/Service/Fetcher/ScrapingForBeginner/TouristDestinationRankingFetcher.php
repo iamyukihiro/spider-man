@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-class TouristDestinationRanking
+class TouristDestinationRankingFetcher
 {
     public function __construct(
         private Client $client,
@@ -20,7 +20,7 @@ class TouristDestinationRanking
     ) {
     }
 
-    public function pull(): Collection
+    public function fetch(): Collection
     {
         $response = $this->requestScrapingPage();
         $html     = $response->getBody()->getContents();

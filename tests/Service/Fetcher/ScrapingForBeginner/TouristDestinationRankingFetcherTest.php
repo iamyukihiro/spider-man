@@ -12,22 +12,22 @@ use PHPUnit\Framework\TestCase;
 
 use function assert;
 
-class TouristDestinationRankingTest extends TestCase
+class TouristDestinationRankingFetcherTest extends TestCase
 {
-    /** @var TouristDestinationRanking */
-    private $scrapingForBeginner;
+    /** @var TouristDestinationRankingFetcher */
+    private $fetcher;
 
     protected function setUp(): void
     {
-        $this->scrapingForBeginner = new TouristDestinationRanking(new Client(), new Document());
+        $this->fetcher = new TouristDestinationRankingFetcher(new Client(), new Document());
     }
 
     public function testIsInstanceOfScrapingForBeginner(): void
     {
-        $SUT = $this->scrapingForBeginner;
-        $actual = $SUT->pull();
+        $SUT = $this->fetcher;
+        $actual = $SUT->fetch();
 
-        $this->assertInstanceOf(TouristDestinationRanking::class, $SUT);
+        $this->assertInstanceOf(TouristDestinationRankingFetcher::class, $SUT);
         $this->assertInstanceOf(Collection::class, $actual);
         $this->assertInstanceOf(TouristDestination::class, $actual->first());
 
