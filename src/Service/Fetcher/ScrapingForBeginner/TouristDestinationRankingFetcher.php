@@ -12,6 +12,10 @@ use Illuminate\Support\Collection;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
+use function collect;
+use function mb_strlen;
+use function mb_substr;
+
 class TouristDestinationRankingFetcher
 {
     public function __construct(
@@ -43,7 +47,7 @@ class TouristDestinationRankingFetcher
 
     /**
      * @param Document $rankingPageDocument
-     * @return Collection|TouristDestination[]
+     * @return Collection<TouristDestination>
      */
     private function makeRankingPageDocumentToTouristDestinations(Document $rankingPageDocument): Collection
     {
@@ -60,7 +64,6 @@ class TouristDestinationRankingFetcher
             $touristDestinationName = mb_substr($headingNumberAndTitleText, mb_strlen($headingNumberText));
             $totalStarRate          = $domElement->find('div.u_rankBox span.evaluateNumber')->text();
 
-            // TODO:Factoryで生成するようにする
             $touristDestinations[] = new TouristDestination($touristDestinationName, $totalStarRate);
         }
 
