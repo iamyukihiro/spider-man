@@ -1,0 +1,4 @@
+[
+  { "time": "10:00:00", "weather": "Sunny", "moon-phase": "Full Moon", "tide": "High Tide", "created_at": "2022-03-10 10:10:10", "updated_at": null },
+  { "time": "10:30:00", "weather": "Sunny", "moon-phase": "Full Moon", "tide": "High Tide", "created_at": "2022-03-10 10:10:10", "updated_at": null }
+]

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Goreboothero\SpiderMan\Command;
 
+use Goreboothero\SpiderMan\Infrastructure\LoadFishingEnvironmentalData;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,13 +18,20 @@ class GetFishingEnvironmentalDataCommand extends Command
     {
         $this->setHelp('釣行日時と場所を指定して、当日の環境情報を取得します。');
 
-        $this->addArgument('date', InputArgument::REQUIRED, '釣行日時 ／ (例)：2022-01-01');
-        $this->addArgument('prefecture', InputArgument::REQUIRED, '県名 (県、府は含めない) ／ (例)：大阪');
-        $this->addArgument('fishing-place', InputArgument::REQUIRED, '釣行場所 ／ (例)：鳥取港');
+//        $this->addArgument('date', InputArgument::REQUIRED, '釣行日時 ／ (例)：2022-01-01');
+//        $this->addArgument('prefecture', InputArgument::REQUIRED, '県名 (県、府は含めない) ／ (例)：大阪');
+//        $this->addArgument('fishing-place', InputArgument::REQUIRED, '釣行場所 ／ (例)：鳥取港');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        // TODO: Fetchロジックの実装
+
+        $loadFishingEnvironmentalData = new LoadFishingEnvironmentalData();
+        $json = $loadFishingEnvironmentalData->connect();
+
+        dd($json);
+
         return Command::SUCCESS;
     }
 }
