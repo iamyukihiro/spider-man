@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Goreboothero\SpiderMan\Command;
@@ -28,7 +27,7 @@ class GetFishingEnvironmentalDataCommand extends Command
         // TODO: Fetchロジックの実装
 
         $fishingEnvironmentalDataLoader = new FishingEnvironmentalDataLoader();
-        $fishingEnvironmentalData = $fishingEnvironmentalDataLoader->connect();
+        $fishingEnvironmentalData = $fishingEnvironmentalDataLoader->load();
 
         dd($fishingEnvironmentalData);
 
