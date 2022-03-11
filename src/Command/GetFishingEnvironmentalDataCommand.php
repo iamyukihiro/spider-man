@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Goreboothero\SpiderMan\Command;
 
-use Goreboothero\SpiderMan\Infrastructure\LoadFishingEnvironmentalData;
+use Goreboothero\SpiderMan\Infrastructure\Datastore\FishingEnvironmentalDataLoader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -27,10 +27,10 @@ class GetFishingEnvironmentalDataCommand extends Command
     {
         // TODO: Fetchロジックの実装
 
-        $loadFishingEnvironmentalData = new LoadFishingEnvironmentalData();
-        $json = $loadFishingEnvironmentalData->connect();
+        $fishingEnvironmentalDataLoader = new FishingEnvironmentalDataLoader();
+        $fishingEnvironmentalData = $fishingEnvironmentalDataLoader->connect();
 
-        dd($json);
+        dd($fishingEnvironmentalData);
 
         return Command::SUCCESS;
     }
