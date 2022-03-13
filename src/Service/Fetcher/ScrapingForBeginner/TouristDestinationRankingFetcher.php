@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Goreboothero\SpiderMan\Service\Fetcher\ScrapingForBeginner;
@@ -26,7 +25,7 @@ class TouristDestinationRankingFetcher
         $html = $response->getBody()->getContents();
         $rankingPageDocument = $this->document->html($html);
 
-        return $this->makeRankingPageDocumentToTouristDestinations($rankingPageDocument);
+        return $this->convertDomToDTOs($rankingPageDocument);
     }
 
     private function requestScrapingPage(): ResponseInterface
@@ -45,7 +44,7 @@ class TouristDestinationRankingFetcher
      * @param Document $rankingPageDocument
      * @return Collection<TouristDestination>
      */
-    private function makeRankingPageDocumentToTouristDestinations(Document $rankingPageDocument): Collection
+    private function convertDomToDTOs(Document $rankingPageDocument): Collection
     {
         $touristDestinations = [];
 
